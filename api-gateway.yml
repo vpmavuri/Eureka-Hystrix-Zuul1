@@ -5,11 +5,11 @@ zuul:
   prefix: /api
   routes:
     hello-server:
-      path: /**
+      path: /server/**
       service-id: HELLO-SERVER
 #      url: http://hello-server:8071
     hello-client:
-      path: /**
+      path: /client/**
       service-id: HELLO-CLIENT
 #      url: http://hello-client:8072
     user:
