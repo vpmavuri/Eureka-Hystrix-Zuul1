@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: hello-server
+# Note that the "/user" endpoint needs to provide the principle of the logged in user (/me endpoint)
+  oauth2:
+    resource: 
+      userInfoUri: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/me
+      preferTokenInfo: false 
+    client:
+      accessTokenUri: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/oauth/token
+      userAuthorizationUri: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/oauth/authorize
+      clientId: acme
+
+# The OAuth2 server definition that would be used to send the authorization requests to
+authserver:
+    hostname: authserver
+    port: 8899
+    contextPath: userauth
+    
+server:
+  port: 8071
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url: 
+      defaultZone: http://eureka-registry:8761/eureka
+---
+spring:
+  profiles: docker
+  application:
+    name: hello-server
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka-registry:8761/eureka
+  
+logging:
+  level:
+    org.springframework.cloud.netflix.zuul: DEBUG
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 60000
