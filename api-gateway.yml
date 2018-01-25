@@ -46,21 +46,18 @@ security:
   oauth2:
 
     client:
-      # access-token-uri: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/oauth/token
-      # user-authorization-uri: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/oauth/authorize
-      # client-id: acme
-      # client-secret: acmesecret
-      access-token-uri: http://auth-server:8899/userauth/oauth/token
-      user-authorization-uri: http://auth-server:8899/userauth/oauth/authorize
+      access-token-uri: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/oauth/token
+      user-authorization-uri: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/oauth/authorize
       client-id: acme
       client-secret: acmesecret
+
 # The userInfoUri is used to authenticate the user so that SSO token can be relayed forward. It needs to either be
 # a physical endpoint (defined using userInfoUri) OR can be bypassed if you use a JSON web token (JWT) that stores
 # information about grants and authentication in the token itself.
 
 # Note that the "/user" endpoint needs to provide the principle of the logged in user (/me endpoint)
     resource:
-      user-info-uri: http://auth-server:8899/userauth/me
+      user-info-uri: http://${authserver.hostname}:${authserver.port}/${authserver.contextPath}/me
       prefer-token-info: false
 
       
