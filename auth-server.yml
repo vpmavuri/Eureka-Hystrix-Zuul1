@@ -8,41 +8,40 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://eureka-registry:8761/eureka/
-
-security:
-  user:
-    password: password
-
-# Datasource and JPA configuration to be used for storing the OAuth authorization details
-# and token store
 spring:
+  application:
+    name: auth-server
   datasource:
-    url: jdbc:mariadb://localhost:3306/oauth2
+    url: jdbc:mysql://mysqldb:3306/oauth2
     username: root
     password: mvp11mgp
-    driver-class: org.mariadb.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
+
 
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
     hibernate:
       ddl-auto: create
-
 ---
 
 spring:
+  application:
+    name: auth-server
   profiles: docker
   datasource:
-    url: jdbc:mariadb://localhost:3306/oauth2
+    url: jdbc:mysql://mysqldb:3306/oauth2
     username: root
     password: mvp11mgp
-    driver-class: org.mariadb.jdbc.Driver
+    driver-class-name: com.mysql.jdbc.Driver
+
 
   jpa:
     database-platform: org.hibernate.dialect.MySQLDialect
     show-sql: true
     hibernate:
       ddl-auto: create
+
 eureka:
 # Register our microservices to Eureka using hostnames in a Docker environment will not work, they will all get
 # one and the same hostname. Instead we configure them to use its IP address during registration with Eureka.
