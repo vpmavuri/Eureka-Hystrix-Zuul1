@@ -36,7 +36,7 @@ eureka:
 # what client crendentials to use to access that server.
 # The OAuth2 server definition that would be used to send the authorization requests to
 authserver:
-    hostname: auth-server
+    hostname: api-gateway
     port: 8899
     contextPath: userauth
 
